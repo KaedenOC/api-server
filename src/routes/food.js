@@ -20,5 +20,11 @@ router.post('/food', async (req, res, next) => {
   res.status(200).send(newFood);
 });
 
+router.get('/food/:id', async (req, res, next) => {
+  let singleFood = await foodModel.findAll({where: {id: req.params.id}});
+
+  res.status(200).send(singleFood);
+});
+
 module.exports = router;
 

@@ -14,10 +14,10 @@ router.get('/ingredients', async (req, res, next) => {
   }
 });
 
-router.post('/food', async (req, res, next) => {
-  let newFood = await ingredientsModel.create(req.body);
+router.post('/ingredients', async (req, res, next) => {
+  let newIngredient = await ingredientsModel.create(req.body);
 
-  res.status(200).send(newFood);
+  res.status(200).send(newIngredient);
 });
 
 module.exports = router;
