@@ -10,11 +10,12 @@ Separate routers that contain all of the routing logic and handlers using Expres
 
 ## Links and Resources
 
-[GitHub Actions]()
+[GitHub Actions](https://github.com/KaedenOC/api-server/actions)
 
-[back-end prod server]()
+[back-end prod server](https://api-server-8rne.onrender.com)
 
 ## Collaborators
+
 Referenced from in class demo as well as worked with instructor Ryan.
 
 ## Setup
