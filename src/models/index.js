@@ -5,7 +5,9 @@ require('dotenv').config();
 const food = require('./food');
 const ingredients = require('./ingredients');
 
-const DATABASE_URL = process.env.DATABASE_URL;
+const DATABASE_URL = process.env.NODE_ENV === 'test'
+  ? 'sqlite::memory:'
+  : process.env.DATABASE_URL;
 
 //database singleton
 const sequelizeDatabase = new Sequelize(DATABASE_URL);
