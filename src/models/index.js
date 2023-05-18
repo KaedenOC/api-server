@@ -13,10 +13,10 @@ const sequelizeDatabase = new Sequelize(DATABASE_URL);
 //create our working and connected food model
 const foodModel = food(sequelizeDatabase, DataTypes);
 
-module.exports = {
-  sequelizeDatabase,
-  foodModel,
-};
+// module.exports = {
+//   sequelizeDatabase,
+//   foodModel,
+// };
 
 //ingredients model
 
