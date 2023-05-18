@@ -20,4 +20,10 @@ router.post('/ingredients', async (req, res, next) => {
   res.status(200).send(newIngredient);
 });
 
+router.get('/ingredients/:id', async (req, res, next) => {
+  let singleIngredient = await ingredientsModel.findAll({where: {id: req.params.id}});
+
+  res.status(200).send(singleIngredient);
+});
+
 module.exports = router;
