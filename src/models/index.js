@@ -2,6 +2,7 @@
 
 const { Sequelize, DataTypes } = require('sequelize');
 const food = require('./food');
+const ingredients = require('./ingredients');
 
 const DATABASE_URL = process.env.DATABASE_URL;
 
@@ -16,4 +17,12 @@ module.exports = {
   foodModel,
 };
 
+//ingredients model
+
+const ingredientsModel = ingredients(sequelizeDatabase, DataTypes);
+
+module.exports = {
+  sequelizeDatabase,
+  ingredientsModel,
+};
 
