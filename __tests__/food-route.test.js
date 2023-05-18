@@ -1,9 +1,9 @@
 'use strict';
 
+const { app } = require('express');
 const supertest = require('supertest');
+const request = supertest(app);
 const { sequelizeDatabase } = require('../src/models');
-const { request } = require('express');
-
 
 beforeAll(async () => {
   await sequelizeDatabase.sync();
