@@ -1,8 +1,9 @@
 'use strict';
 
 const { Sequelize, DataTypes } = require('sequelize');
+require('dotenv').config();
 const food = require('./food');
-const ingredients = require('./ingredients');
+// const ingredients = require('./ingredients');
 
 const DATABASE_URL = process.env.DATABASE_URL;
 
@@ -19,10 +20,11 @@ module.exports = {
 
 //ingredients model
 
-const ingredientsModel = ingredients(sequelizeDatabase, DataTypes);
+// const ingredientsModel = ingredients(sequelizeDatabase, DataTypes);
 
 module.exports = {
   sequelizeDatabase,
-  ingredientsModel,
+  foodModel,
+  // ingredientsModel,
 };
 

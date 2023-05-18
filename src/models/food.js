@@ -2,7 +2,7 @@
 
 module.exports = (sequelizeDatabase, DataTypes) => {
   //each property corresponds to a column in the database
-  return sequelizeDatabase.define('food', {
+  return sequelizeDatabase.define('foods', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
