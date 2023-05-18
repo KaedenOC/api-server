@@ -13,6 +13,22 @@ class Collection {
       return error;
     }
   }
+
+  async read(id=null) {
+    try {
+
+      if(id) {
+        const singleRecord = await this.model.findByPk(id);
+        return singleRecord;
+      } else {
+        const records = await this.model.findAll();
+        return records;
+      }
+    } catch (error) {
+      console.error('model read error');
+      return error;
+    }
+  }
 }
 
 

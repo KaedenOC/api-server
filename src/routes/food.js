@@ -2,7 +2,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { foodModel } = require('../models/index');
+const { foodModel, ingredientsModel } = require('../models/index');
 
 router.get('/food', async (req, res, next) => {
   try {
@@ -38,6 +38,24 @@ router.delete('/food/:id', async (req, res, next) => {
 
   res.status(200).send('food deleted successfully');
 });
+
+router.get('/foodWithIngredients', async (req, res, next) => {
+  let foods = await foodModel.findAll({
+    include: {
+      model: ingredientsModel,
+    },
+  });
+  res.status(200).send(foods);
+});
+
+router.get('/foodWithSingleIngredient/:id', async (req, res, next) => {
+  let foods = await foodModel.findAll({
+    include: {model: ingredientsModel},
+    where: {id: req.params.id},
+  });
+  res.status(200).send(foods);
+});
+
 
 module.exports = router;
 
