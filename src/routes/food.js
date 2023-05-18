@@ -26,5 +26,18 @@ router.get('/food/:id', async (req, res, next) => {
   res.status(200).send(singleFood);
 });
 
+router.put('/food/:id', async (req, res, next) => {
+  await foodModel.update(req.body, {where: {id: req.params.id}});
+  let updatedFood = await foodModel.findAll({where: {id: req.params.id}});
+
+  res.status(200).send(updatedFood);
+});
+
+router.delete('/food/:id', async (req, res, next) => {
+  await foodModel.destroy({where: {id: req.params.id}});
+
+  res.status(200).send('food deleted successfully');
+});
+
 module.exports = router;
 

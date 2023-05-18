@@ -26,4 +26,17 @@ router.get('/ingredients/:id', async (req, res, next) => {
   res.status(200).send(singleIngredient);
 });
 
+router.put('/ingredients/:id', async (req, res, next) => {
+  await ingredientsModel.update(req.body, {where: {id: req.params.id}});
+  let updatedIngredient = await ingredientsModel.findAll({where: {id: req.params.id}});
+
+  res.status(200).send(updatedIngredient);
+});
+
+router.delete('/ingredients/:id', async (req, res, next) => {
+  await ingredientsModel.destroy({where: {id: req.params.id}});
+
+  res.status(200).send('Ingredient deleted successfully');
+});
+
 module.exports = router;
