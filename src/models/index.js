@@ -32,6 +32,6 @@ ingredientsModel.belongsTo(foodModel);
 module.exports = {
   sequelizeDatabase,
   foodModel,
-  ingredients: new Collection(ingredientsModel),
+  ingredient: new Collection(ingredientsModel),
 };
 
