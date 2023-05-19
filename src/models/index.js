@@ -4,6 +4,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
 const food = require('./food');
 const ingredients = require('./ingredients');
+const Collection = require('./collection');
 
 const DATABASE_URL = process.env.NODE_ENV === 'test'
   ? 'sqlite::memory:'
@@ -24,9 +25,13 @@ const foodModel = food(sequelizeDatabase, DataTypes);
 
 const ingredientsModel = ingredients(sequelizeDatabase, DataTypes);
 
+//create associations
+foodModel.hasMany(ingredientsModel);
+ingredientsModel.belongsTo(foodModel);
+
 module.exports = {
   sequelizeDatabase,
   foodModel,
-  ingredientsModel,
+  ingredient: new Collection(ingredientsModel),
 };
 
