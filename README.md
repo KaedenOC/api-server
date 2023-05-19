@@ -37,3 +37,9 @@ To run tests, after running npm i, run the command npm test
 UML
 
 ![UML Class 03](./src/assets/uml03.jpg)
+
+## Notes from josh
+
+- Code looks good and was easy to read when I hopped in.
+
+- I would just make sure that your test coverage is good.
