@@ -26,12 +26,19 @@ const foodModel = food(sequelizeDatabase, DataTypes);
 const ingredientsModel = ingredients(sequelizeDatabase, DataTypes);
 
 //create associations
-foodModel.hasMany(ingredientsModel);
-ingredientsModel.belongsTo(foodModel);
+foodModel.hasMany(ingredientsModel),{
+  foreignKey: 'foodId',
+  sourceKey: 'id',
+};
+ingredientsModel.belongsTo(foodModel),{
+  foreignKey: 'foodId',
+  targetKey: 'id',
+};
 
 module.exports = {
   sequelizeDatabase,
-  foodModel,
+  foods: new Collection(foodModel),
   ingredient: new Collection(ingredientsModel),
+  ingredientsModel,
 };
 

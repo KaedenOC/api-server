@@ -2,11 +2,11 @@
 
 const express = require('express');
 const router = express.Router();
-const { foodModel, ingredientsModel } = require('../models/index');
+const { foods, ingredientsModel } = require('../models/index');
 
 router.get('/food', async (req, res, next) => {
   try {
-    let food = await foodModel.findAll();
+    let food = await foods.read();
 
     res.status(200).send(food);
   } catch (error) {
@@ -15,45 +15,41 @@ router.get('/food', async (req, res, next) => {
 });
 
 router.post('/food', async (req, res, next) => {
-  let newFood = await foodModel.create(req.body);
+  let newFood = await foods.create(req.body);
 
   res.status(200).send(newFood);
 });
 
 router.get('/food/:id', async (req, res, next) => {
-  let singleFood = await foodModel.findAll({where: {id: req.params.id}});
+  let singleFood = await foods.findAll({where: {id: req.params.id}});
 
   res.status(200).send(singleFood);
 });
 
 router.put('/food/:id', async (req, res, next) => {
-  await foodModel.update(req.body, {where: {id: req.params.id}});
-  let updatedFood = await foodModel.findAll({where: {id: req.params.id}});
+  await foods.update(req.body, {where: {id: req.params.id}});
+  let updatedFood = await foods.findByPk(req.params.id);
 
   res.status(200).send(updatedFood);
 });
 
 router.delete('/food/:id', async (req, res, next) => {
-  await foodModel.destroy({where: {id: req.params.id}});
+  await foods.destroy({where: {id: req.params.id}});
 
   res.status(200).send('food deleted successfully');
 });
 
 router.get('/foodWithIngredients', async (req, res, next) => {
-  let foods = await foodModel.findAll({
-    include: {
-      model: ingredientsModel,
-    },
-  });
-  res.status(200).send(foods);
+  let foodWithIng = await foods.readAllWith(ingredientsModel);
+  res.status(200).send(foodWithIng);
 });
 
 router.get('/foodWithSingleIngredient/:id', async (req, res, next) => {
-  let foods = await foodModel.findAll({
+  let oneFood = await foods.findAll({
     include: {model: ingredientsModel},
     where: {id: req.params.id},
   });
-  res.status(200).send(foods);
+  res.status(200).send(oneFood);
 });
 
 

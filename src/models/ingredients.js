@@ -7,5 +7,9 @@ module.exports = (sequelizeDatabase, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    foodId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 };
