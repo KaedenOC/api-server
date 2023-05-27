@@ -1,9 +1,10 @@
 'use strict';
 
-const { app } = require('express');
+const { app } = require('../src/server');
 const supertest = require('supertest');
-const request = supertest(app);
 const { sequelizeDatabase } = require('../src/models');
+
+const request = supertest(app);
 
 beforeAll(async () => {
   await sequelizeDatabase.sync();
@@ -25,28 +26,28 @@ describe('food route', () => {
     const response = await request.get('/food');
 
     expect(response.status).toEqual(200);
-    expect(response.body[0].name).toEqual('Apple');
+    expect(response.body[0].name).toEqual('test');
   });
 
   test('read one route', async () => {
     const response = await request.get('/food/1');
 
     expect(response.status).toEqual(200);
-    expect(response.body[0].name).toEqual('Apple');
+    expect(response.body.name).toEqual('test');
   });
 
   test('update route', async () => {
     const response = await request.put('/food/1').send({name: 'peach'});
 
     expect(response.status).toEqual(200);
-    expect(response.body[0].name).toEqual('peach');
+    expect(response.body.name).toEqual('peach');
   });
 
   test('delete route', async () => {
     const response = await request.delete('/food/1');
     console.log(response.body);
     expect(response.status).toEqual(200);
-    expect(response.body[0].name).toEqual('peach');
+    expect(response.body.name).toEqual('peach');
   });
 });
 

@@ -29,6 +29,27 @@ class Collection {
       return error;
     }
   }
+
+  async update(body, id) {
+    try {
+      let record = await this.model.update(body, { where: { id: id } });
+      return record;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  }
+
+  async delete(id) {
+    try {
+      let record = await this.model.findByPk(id);
+      return record;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  }
+
   async readAllWith(model) {
     try {
       let record = await this.model.findAll({include: {

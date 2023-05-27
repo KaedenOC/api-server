@@ -27,16 +27,21 @@ router.get('/food/:id', async (req, res, next) => {
 });
 
 router.put('/food/:id', async (req, res, next) => {
-  await foods.update(req.body, {where: {id: req.params.id}});
-  let updatedFood = await foods.findByPk(req.params.id);
+  await foods.update(req.body, req.params.id);
+  let updatedFood = await foods.read(req.params.id);
 
   res.status(200).send(updatedFood);
 });
 
 router.delete('/food/:id', async (req, res, next) => {
-  await foods.destroy({where: {id: req.params.id}});
+  try {
+    let deletedFood = await foods.delete(req.params.id);
+    res.status(200).send(deletedFood);
 
-  res.status(200).send('food deleted successfully');
+  } catch (error) {
+    next(error);
+  }
+
 });
 
 router.get('/foodWithIngredients', async (req, res, next) => {
