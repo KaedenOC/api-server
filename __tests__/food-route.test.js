@@ -37,17 +37,17 @@ describe('food route', () => {
   });
 
   test('update route', async () => {
-    const response = await request.put('/food/1').send({name: 'peach'});
+    const response = await request.put('/food/1').send({name: 'test'});
 
     expect(response.status).toEqual(200);
-    expect(response.body.name).toEqual('peach');
+    expect(response.body.name).toEqual('test');
   });
 
   test('delete route', async () => {
     const response = await request.delete('/food/1');
     console.log(response.body);
     expect(response.status).toEqual(200);
-    expect(response.body.name).toEqual('peach');
+    expect(response.body.name).toEqual('test');
   });
 });
 

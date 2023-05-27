@@ -21,9 +21,14 @@ router.post('/food', async (req, res, next) => {
 });
 
 router.get('/food/:id', async (req, res, next) => {
-  let singleFood = await foods.findAll({where: {id: req.params.id}});
+  try {
+    let singleFood = await foods.read(req.params.id);
 
-  res.status(200).send(singleFood);
+    res.status(200).send(singleFood);
+
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 router.put('/food/:id', async (req, res, next) => {
@@ -51,8 +56,8 @@ router.get('/foodWithIngredients', async (req, res, next) => {
 
 router.get('/foodWithSingleIngredient/:id', async (req, res, next) => {
   let oneFood = await foods.findAll({
-    include: {model: ingredientsModel},
-    where: {id: req.params.id},
+    include: { model: ingredientsModel },
+    where: { id: req.params.id },
   });
   res.status(200).send(oneFood);
 });
